@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import React from "react";
 import logo from "./assets/download.png";
 import dotShape from "./assets/dot-shape-circle.png";
@@ -33,6 +33,9 @@ import {
   Award,
   Code,
   TrendingUp,
+  Mail,
+  Phone,
+  Linkedin,
 } from "lucide-react";
 
 import {
@@ -53,6 +56,16 @@ function App() {
   const [activeProject, setActiveProject] = useState(0);
   const [hoveredExp, setHoveredExp] = useState(null);
   const [hoveredEdu, setHoveredEdu] = useState(null);
+
+  // Smooth scroll function
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setMenuOpen(false); // Close mobile menu after clicking
+    }
+  };
+
   const techCategories = [
     {
       category: "Frontend Development",
@@ -83,12 +96,13 @@ function App() {
       ],
     },
   ];
+
   const projects = [
     {
       title: "MentiHealth",
       tagline: "AI-Powered Mental Wellness Platform",
       description:
-        "A comprehensive mental health ecosystem designed specifically for introverts. Features AI-driven self-assessment tools, anonymous community support forums, and a seamless real-time booking system connecting users with licensed counselors.",
+        "A comprehensive mental health platform helping introverted users monitor emotional well-being and receive AI-guided self-help recommendations. Features anonymous community support forums and a seamless real-time booking system connecting users with licensed counselors.",
       icon: <Brain className="w-8 h-8" />,
       image: "🧠",
       tech: ["React", "Node.js", "MongoDB", "AI/ML", "WebSocket"],
@@ -131,9 +145,9 @@ function App() {
         },
       ],
       impact:
-        "Empowering introverts to take control of their mental health journey with a 3-in-1 integrated platform that combines technology with human support.",
-      liveLink: "#",
-      githubLink: "#",
+        "Solved the problem of users lacking a private, personalized mental health space, enabling data-driven counseling access and emotional tracking.",
+      liveLink: "https://mentihealth-1.onrender.com/",
+      githubLink: "https://github.com/Kshitij-Halmare/MentiHealth",
       gradient: "from-purple-600 via-pink-500 to-rose-500",
       bgGradient: "from-purple-500/10 via-pink-500/10 to-rose-500/10",
     },
@@ -141,7 +155,7 @@ function App() {
       title: "ScriptoSphere",
       tagline: "Next-Gen Content Creation Platform",
       description:
-        "A modern blogging platform that revolutionizes content creation with a powerful low-code editor, instant media management, and real-time collaboration features. Built for creators who demand speed and flexibility.",
+        "A modern blogging platform that revolutionizes content creation with a powerful low-code editor integrating Editor.js and Cloudinary for media uploads and real-time notifications. Built for creators who demand speed and flexibility.",
       icon: <BookOpen className="w-8 h-8" />,
       image: "📝",
       tech: [
@@ -191,9 +205,9 @@ function App() {
         },
       ],
       impact:
-        "Reducing blog creation time by 40% while enhancing content quality with professional-grade editing tools and instant publishing capabilities.",
-      liveLink: "#",
-      githubLink: "#",
+        "Solved the problem of time-consuming content creation by enabling modular editing and reducing blog creation time by 40%.",
+      liveLink: "https://blogging-website-1-semf.onrender.com/",
+      githubLink: "https://github.com/Kshitij-Halmare/Blogging_Website",
       gradient: "from-blue-600 via-cyan-500 to-teal-500",
       bgGradient: "from-blue-500/10 via-cyan-500/10 to-teal-500/10",
     },
@@ -201,7 +215,7 @@ function App() {
       title: "Flavor Fusion",
       tagline: "Smart Food Delivery Experience",
       description:
-        "A full-stack food delivery platform featuring intelligent cart management, secure payment processing with Stripe, and lightning-fast performance through optimized Redux architecture. Built for food lovers who value speed and reliability.",
+        "A full-stack food delivery platform featuring intelligent cart management, secure payment processing with Stripe, and lightning-fast performance through optimized Redux architecture. Real-time cart updates and seamless checkout experience.",
       icon: <Utensils className="w-8 h-8" />,
       image: "🍔",
       tech: ["React", "Node.js", "MongoDB", "Redux", "Stripe API", "JWT"],
@@ -244,31 +258,24 @@ function App() {
         },
       ],
       impact:
-        "Delivering a seamless ordering experience with optimized state management that reduced cart latency by 30% and improved checkout conversion rates.",
-      liveLink: "#",
-      githubLink: "#",
+        "Solved checkout performance issues by optimizing Redux state management, reducing cart latency by 30%, and improving transaction reliability.",
+      liveLink: "https://food-app-1-p51c.onrender.com/",
+      githubLink: "https://github.com/Kshitij-Halmare/Food-App",
       gradient: "from-orange-600 via-red-500 to-pink-500",
       bgGradient: "from-orange-500/10 via-red-500/10 to-pink-500/10",
     },
   ];
 
   const currentProject = projects[activeProject];
+
   return (
     <>
       <div className="bg-[#032628] font-sans font-extrabold min-h-screen">
-        <div className="fixed z-1000 w-full h-full text-center left-0 top-0 bg-black hidden">
-          <div className="relative -translate-x-1/2 -translate-y-1/2 text-center left-1/2 top-1/2">
-            <div className="bounce1 loading inline-block bg-primary w-3.5 h-3.5 m-[3px] rounded-full"></div>
-            <div className="bounce2 loading inline-block bg-primary w-3.5 h-3.5 m-[3px] rounded-full"></div>
-            <div className="bounce3 loading inline-block bg-primary w-3.5 h-3.5 m-[3px] rounded-full"></div>
-          </div>
-        </div>
-
-        <header className="w-full z-50 relative">
+        <header className="w-full z-50 fixed top-0 bg-[#032628]/95 backdrop-blur-sm border-b border-gray-800/50">
           <div className="container mx-auto ">
             <div className="flex items-center justify-between px-4 lg:px-0">
               <div className="z-10 py-0.5 relative ">
-                <a href="/">
+                <a href="#home" onClick={(e) => { e.preventDefault(); scrollToSection('home'); }}>
                   <img
                     src={logo}
                     alt="Logo"
@@ -278,17 +285,16 @@ function App() {
                 </a>
               </div>
               <nav
-                className={`lg:static absolute left-0 bg-black lg:bg-inherit w-full lg:w-auto top-full transition-all duration-500 ease-in-out ${
-                  menuOpen
+                className={`lg:static absolute left-0 bg-black lg:bg-inherit w-full lg:w-auto top-full transition-all duration-500 ease-in-out ${menuOpen
                     ? "h-auto opacity-100 visible"
                     : "h-0 opacity-0 invisible"
-                } lg:h-auto lg:opacity-100 lg:visible overflow-hidden`}
+                  } lg:h-auto lg:opacity-100 lg:visible overflow-hidden`}
               >
                 <ul className="flex lg:flex-row flex-col lg:items-center ">
                   <li className="lg:py-11 py-4 px-5 border-b border-gray-700 lg:border-b-0">
                     <a
                       className="opacity-100 block text-[15px] font-bold relative uppercase text-gray-300 transition-all duration-500 ease-linear cursor-pointer hover:text-primary"
-                      href="#home"
+                      onClick={(e) => { e.preventDefault(); scrollToSection('home'); }}
                     >
                       Home
                     </a>
@@ -296,7 +302,7 @@ function App() {
                   <li className="lg:py-11 py-4 px-5 border-b border-gray-700 lg:border-b-0">
                     <a
                       className="opacity-100 block text-[15px] font-bold relative uppercase text-gray-300 transition-all duration-500 ease-linear cursor-pointer hover:text-primary"
-                      href="#about"
+                      onClick={(e) => { e.preventDefault(); scrollToSection('about'); }}
                     >
                       about
                     </a>
@@ -304,7 +310,7 @@ function App() {
                   <li className="lg:py-11 py-4 px-5 border-b border-gray-700 lg:border-b-0">
                     <a
                       className="opacity-100 block text-[15px] font-bold relative uppercase text-gray-300 transition-all duration-500 ease-linear cursor-pointer hover:text-primary"
-                      href="#resume"
+                      onClick={(e) => { e.preventDefault(); scrollToSection('resume'); }}
                     >
                       Resume
                     </a>
@@ -312,15 +318,7 @@ function App() {
                   <li className="lg:py-11 py-4 px-5 border-b border-gray-700 lg:border-b-0">
                     <a
                       className="opacity-100 block text-[15px] font-bold relative uppercase text-gray-300 transition-all duration-500 ease-linear cursor-pointer hover:text-primary"
-                      href="#services"
-                    >
-                      services
-                    </a>
-                  </li>
-                  <li className="lg:py-11 py-4 px-5 border-b border-gray-700 lg:border-b-0">
-                    <a
-                      className="opacity-100 block text-[15px] font-bold relative uppercase text-gray-300 transition-all duration-500 ease-linear cursor-pointer hover:text-primary"
-                      href="#skills"
+                      onClick={(e) => { e.preventDefault(); scrollToSection('skills'); }}
                     >
                       skills
                     </a>
@@ -328,7 +326,7 @@ function App() {
                   <li className="lg:py-11 py-4 px-5 border-b border-gray-700 lg:border-b-0">
                     <a
                       className="opacity-100 block text-[15px] font-bold relative uppercase text-gray-300 transition-all duration-500 ease-linear cursor-pointer hover:text-primary"
-                      href="#portfolio"
+                      onClick={(e) => { e.preventDefault(); scrollToSection('portfolio'); }}
                     >
                       projects
                     </a>
@@ -336,15 +334,7 @@ function App() {
                   <li className="lg:py-11 py-4 px-5 border-b border-gray-700 lg:border-b-0">
                     <a
                       className="opacity-100 block text-[15px] font-bold relative uppercase text-gray-300 transition-all duration-500 ease-linear cursor-pointer hover:text-primary"
-                      href="#blog"
-                    >
-                      blog
-                    </a>
-                  </li>
-                  <li className="lg:py-11 py-4 px-5 border-b border-gray-700 lg:border-b-0">
-                    <a
-                      className="opacity-100 block text-[15px] font-bold relative uppercase text-gray-300 transition-all duration-500 ease-linear cursor-pointer hover:text-primary"
-                      href="#contact"
+                      onClick={(e) => { e.preventDefault(); scrollToSection('contact'); }}
                     >
                       Contact
                     </a>
@@ -374,11 +364,12 @@ function App() {
             </div>
           </div>
         </header>
-        <main>
-          <section className="pt-[70px]">
+
+        <main className="pt-20">
+          <section id="home" className="pt-[70px] min-h-screen flex flex-col justify-center">
             <div className="flex flex-col items-center justify-center text-center mb-[25px]">
               <h2 className="font-normal text-[rgba(255,255,255,0.69)] text-xl mb-[5px]">
-                Hi! 👋 My name is Diego Liam
+                Hi! 👋 My name is Kshitij Halmare
               </h2>
               <div className="flex flex-col gap-1 text-center">
                 <div className="absolute right-[18%] top-[60%] custom-spin">
@@ -400,7 +391,10 @@ function App() {
               </div>
             </div>
             <div className="w-full flex items-center justify-center">
-              <button className="bg-[#e8c83e] px-[40px] mb-[25px] py-[15px] text-[18px] font-medium drop-shadow-md drop-shadow-amber-50">
+              <button
+                onClick={(e) => { e.preventDefault(); scrollToSection('contact'); }}
+                className="bg-[#e8c83e] px-[40px] mb-[25px] py-[15px] text-[18px] font-medium drop-shadow-md drop-shadow-amber-50 hover:bg-[#f5d84e] transition-all duration-300"
+              >
                 Hire me {`>`}
               </button>
             </div>
@@ -419,20 +413,20 @@ function App() {
                 </div>
 
                 <a
-                  href="https://leetcode.com/"
+                  href="https://leetcode.com/u/kshitij_halmare/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex flex-col items-center w-[140px] sm:w-auto"
+                  className="flex flex-col items-center w-[140px] sm:w-auto hover:scale-105 transition-transform"
                 >
                   <SiLeetcode className="w-8 h-8 sm:w-10 sm:h-10 mb-1" />
-                  <p className="text-sm sm:text-base">750+ LeetCode Problems</p>
+                  <p className="text-sm sm:text-base">1000+ LeetCode Problems</p>
                 </a>
 
                 <a
-                  href="https://www.codechef.com/"
+                  href="https://www.codechef.com/users/kshitij_1009"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex flex-col items-center w-[140px] sm:w-auto"
+                  className="flex flex-col items-center w-[140px] sm:w-auto hover:scale-105 transition-transform"
                 >
                   <SiCodechef className="w-8 h-8 sm:w-10 sm:h-10 mb-1" />
                   <p className="text-sm sm:text-base">2★ on CodeChef</p>
@@ -440,7 +434,8 @@ function App() {
               </div>
             </div>
           </section>
-          <section className="pt-[100px] mb-[45px]">
+
+          <section id="about" className="pt-[100px] mb-[45px] min-h-screen flex items-center">
             <div className="grid lg:grid-cols-2 grid-cols-1 gap-8 items-center justify-center mx-6 lg:mx-10">
               <div>
                 <img
@@ -452,22 +447,19 @@ function App() {
 
               <div className="py-12 px-6 sm:px-12 md:px-20 text-white">
                 <div className="max-w-4xl mx-auto text-center md:text-left">
-                  {/* Section Title */}
                   <div className="text-[#e8c83e] font-semibold text-sm uppercase tracking-[3px] mb-3">
                     About Me
                   </div>
 
-                  {/* Heading */}
                   <h2 className="text-3xl md:text-4xl font-bold leading-snug mb-6">
                     A passionate{" "}
-                    <span className="text-[#e8c83e]">Full-Stack Developer</span>
-                    who loves building impactful, scalable, and user-focused web
+                    <span className="text-[#e8c83e]">Software Engineer</span>
+                    {" "}who loves building impactful, scalable, and user-focused web
                     experiences.
                   </h2>
 
-                  {/* Description */}
                   <p className="text-gray-300 leading-relaxed text-[16px] md:text-[17px]">
-                    Hi! I’m{" "}
+                    Hi! I'm{" "}
                     <span className="text-[#e8c83e] font-semibold">
                       Kshitij Halmare
                     </span>{" "}
@@ -487,7 +479,7 @@ function App() {
                   </p>
 
                   <p className="text-gray-300 mt-5 leading-relaxed text-[16px] md:text-[17px]">
-                    I’ve built and deployed multiple end-to-end applications —
+                    I've built and deployed multiple end-to-end applications —
                     from
                     <span className="text-[#e8c83e]">
                       {" "}
@@ -503,7 +495,7 @@ function App() {
                     <span className="text-[#e8c83e]">
                       1000+ DSA problems solved
                     </span>
-                    and hands-on experience in real-world projects, I’m
+                    {" "}and hands-on experience in real-world projects, I'm
                     constantly evolving to create meaningful digital products
                     that make an impact.
                   </p>
@@ -511,9 +503,9 @@ function App() {
               </div>
             </div>
           </section>
-          <section className="bg-[#032628] py-20 px-6 lg:px-24">
-            <div className="max-w-7xl mx-auto">
-              {/* Header */}
+
+          <section id="skills" className="bg-[#032628] py-20 px-6 lg:px-24 min-h-screen flex items-center">
+            <div className="max-w-7xl mx-auto w-full">
               <div className="text-center mb-16">
                 <h2 className="text-4xl lg:text-5xl font-bold mb-4 text-[#e8c83e] tracking-wide">
                   Tech Stack
@@ -525,7 +517,6 @@ function App() {
                 </p>
               </div>
 
-              {/* Categories */}
               {techCategories.map((category, idx) => (
                 <div key={idx} className="mb-16 last:mb-0">
                   <h3 className="text-2xl font-semibold text-white mb-8 text-center md:text-left">
@@ -543,7 +534,6 @@ function App() {
                             style={{ color }}
                             className="transition-transform group-hover:scale-110 duration-300"
                           />
-                          {/* Glow effect */}
                           <div
                             className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-300"
                             style={{
@@ -560,7 +550,6 @@ function App() {
                 </div>
               ))}
 
-              {/* Stats Section */}
               <div className="mt-20 pt-16 border-t border-[#e8c83e]/20">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
                   <div className="group">
@@ -602,9 +591,9 @@ function App() {
               </div>
             </div>
           </section>
-          <section className="bg-[#032628] py-20 px-6 lg:px-24 overflow-hidden">
-            <div className="max-w-7xl mx-auto">
-              {/* Header */}
+
+          <section id="portfolio" className="bg-[#032628] py-20 px-6 lg:px-24 overflow-hidden min-h-screen flex items-center">
+            <div className="max-w-7xl mx-auto w-full">
               <div className="text-center mb-16">
                 <div className="inline-block mb-4">
                   <span className="px-4 py-2 bg-[#e8c83e]/10 text-[#e8c83e] rounded-full text-sm font-semibold border border-[#e8c83e]/20">
@@ -614,7 +603,7 @@ function App() {
                 <h2 className="text-4xl lg:text-6xl font-bold mb-4 text-white tracking-tight">
                   Featured <span className="text-[#e8c83e]">Projects</span>
                 </h2>
-                <div className="w-24 h-1  from-transparent via-[#e8c83e] to-transparent mx-auto mb-6"></div>
+                <div className="w-24 h-1 mx-auto mb-6 bg-[#e8c83e]"></div>
                 <p className="text-gray-400 text-lg max-w-3xl mx-auto leading-relaxed">
                   Building impactful solutions with cutting-edge technologies.
                   Each project represents real-world problems solved with
@@ -622,17 +611,15 @@ function App() {
                 </p>
               </div>
 
-              {/* Project Navigation */}
               <div className="flex flex-wrap justify-center gap-4 mb-12">
                 {projects.map((project, idx) => (
                   <button
                     key={idx}
                     onClick={() => setActiveProject(idx)}
-                    className={`group px-6 py-3 rounded-xl font-semibold transition-all duration-300 ${
-                      activeProject === idx
+                    className={`group px-6 py-3 rounded-xl font-semibold transition-all duration-300 ${activeProject === idx
                         ? "bg-[#e8c83e] text-[#032628] shadow-lg shadow-[#e8c83e]/30"
                         : "bg-[#043b3b] text-gray-300 hover:bg-[#054a4d] border border-[#e8c83e]/20"
-                    }`}
+                      }`}
                   >
                     <div className="flex items-center gap-2">
                       <span className="text-2xl">{project.image}</span>
@@ -642,22 +629,17 @@ function App() {
                 ))}
               </div>
 
-              {/* Featured Project Card */}
               <div className="relative">
-                {/* Animated Background */}
                 <div
                   className={`absolute inset-0  ${currentProject.bgGradient} rounded-3xl blur-3xl opacity-30`}
                 ></div>
 
                 <div className="relative bg-[#043b3b] rounded-3xl overflow-hidden border border-[#e8c83e]/30 shadow-2xl">
-                  {/* Top Bar */}
                   <div className={`h-2  ${currentProject.gradient}`}></div>
 
                   <div className="p-8 lg:p-12">
                     <div className="grid lg:grid-cols-5 gap-8">
-                      {/* Left Column - Main Info */}
                       <div className="lg:col-span-3 space-y-6">
-                        {/* Header */}
                         <div className="flex items-start gap-4">
                           <div
                             className={`p-4 rounded-2xl  ${currentProject.gradient} text-white shadow-lg`}
@@ -685,12 +667,10 @@ function App() {
                           </div>
                         </div>
 
-                        {/* Description */}
                         <p className="text-gray-300 text-lg leading-relaxed">
                           {currentProject.description}
                         </p>
 
-                        {/* Impact Statement */}
                         <div className="bg-[#032628] rounded-xl p-6 border-l-4 border-[#e8c83e]">
                           <div className="flex items-start gap-3">
                             <Zap className="w-5 h-5 text-[#e8c83e]  mt-1" />
@@ -705,7 +685,6 @@ function App() {
                           </div>
                         </div>
 
-                        {/* Metrics */}
                         <div className="grid grid-cols-2 gap-4">
                           {currentProject.metrics.map((metric, i) => (
                             <div
@@ -727,7 +706,6 @@ function App() {
                           ))}
                         </div>
 
-                        {/* Tech Stack */}
                         <div>
                           <h4 className="text-white font-semibold mb-3 flex items-center gap-2">
                             <Code2 className="w-5 h-5 text-[#e8c83e]" />
@@ -745,10 +723,11 @@ function App() {
                           </div>
                         </div>
 
-                        {/* Action Buttons */}
                         <div className="flex flex-wrap gap-4 pt-4">
                           <a
                             href={currentProject.liveLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="group flex items-center gap-2 px-8 py-4 bg-[#e8c83e] text-[#032628] rounded-xl font-bold hover:bg-[#f5d84e] transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-[#e8c83e]/30"
                           >
                             <ExternalLink className="w-5 h-5 group-hover:rotate-12 transition-transform" />
@@ -756,6 +735,8 @@ function App() {
                           </a>
                           <a
                             href={currentProject.githubLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="group flex items-center gap-2 px-8 py-4 bg-[#032628] text-[#e8c83e] rounded-xl font-bold border-2 border-[#e8c83e]/30 hover:border-[#e8c83e] transition-all duration-300 hover:scale-105"
                           >
                             <Github className="w-5 h-5 group-hover:rotate-12 transition-transform" />
@@ -764,7 +745,6 @@ function App() {
                         </div>
                       </div>
 
-                      {/* Right Column - Features */}
                       <div className="lg:col-span-2 bg-[#032628] rounded-2xl p-6 lg:p-8">
                         <h4 className="text-xl font-bold text-[#e8c83e] mb-6 flex items-center gap-2">
                           <Award className="w-6 h-6" />
@@ -791,11 +771,13 @@ function App() {
                           ))}
                         </div>
                       </div>
+
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+
           </section>
           <div className="bg-[#032628] min-h-screen">
             {/* EXPERIENCE SECTION */}
@@ -825,7 +807,6 @@ function App() {
 
                 {/* Timeline */}
                 <div className="relative">
-                  {/* Vertical line */}
                   <div className="hidden md:block absolute left-0 top-0 bottom-0 w-[2px] bg-linear-to-b from-[#e8c83e] via-amber-500/50 to-transparent"></div>
 
                   <div className="space-y-12">
@@ -839,8 +820,7 @@ function App() {
                       <div
                         className="hidden md:block absolute -left-[7px] top-8 w-4 h-4 bg-[#e8c83e] rounded-full border-4 border-gray-900 z-10 transition-transform duration-300"
                         style={{
-                          transform:
-                            hoveredExp === 1 ? "scale(1.3)" : "scale(1)",
+                          transform: hoveredExp === 1 ? "scale(1.3)" : "scale(1)",
                         }}
                       >
                         <div className="absolute inset-0 bg-[#e8c83e] rounded-full animate-ping opacity-75"></div>
@@ -848,11 +828,10 @@ function App() {
 
                       <div className="md:ml-12 group">
                         <div
-                          className={`bg-linear-to-r from-[#032628]/80 to-[#021819]/80 backdrop-blur-sm p-8 rounded-2xl border border-gray-700/50 shadow-2xl transition-all duration-500 ${
-                            hoveredExp === 1
+                          className={`bg-linear-to-r from-[#032628]/80 to-[#021819]/80 backdrop-blur-sm p-8 rounded-2xl border border-gray-700/50 shadow-2xl transition-all duration-500 ${hoveredExp === 1
                               ? "shadow-amber-500/20 border-[#e8c83e]/50 translate-x-2"
                               : ""
-                          }`}
+                            }`}
                         >
                           {/* Accent corner */}
                           <div className="absolute top-0 right-0 w-20 h-20 bg-linear-to-r from-[#e8c83e]/20 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -861,15 +840,15 @@ function App() {
                             <div className="flex items-start justify-between flex-wrap gap-4 mb-4">
                               <div>
                                 <h4 className="text-2xl font-bold text-white mb-2 group-hover:text-[#e8c83e] transition-colors duration-300">
-                                  Full-Stack Developer Intern
+                                  Full-Stack Intern
                                 </h4>
                                 <div className="flex items-center gap-2 text-gray-400 text-sm mb-1">
                                   <MapPin className="w-4 h-4" />
-                                  <span>Tech Company / Remote</span>
+                                  <span>Wooferz / Remote</span>
                                 </div>
                                 <div className="flex items-center gap-2 text-[#e8c83e] text-sm font-medium">
                                   <Calendar className="w-4 h-4" />
-                                  <span>Jan 2025 – Apr 2025</span>
+                                  <span>May 2024 – Aug 2024</span>
                                 </div>
                               </div>
                               <div className="bg-[#e8c83e]/10 px-4 py-2 rounded-full border border-[#e8c83e]/30">
@@ -883,9 +862,9 @@ function App() {
 
                             <ul className="space-y-3">
                               {[
-                                "Developed and deployed responsive full-stack web applications using React and Node.js.",
-                                "Integrated REST APIs and optimized frontend performance by 25%.",
-                                "Collaborated in an agile environment with version control using GitHub.",
+                                "Developed platforms to help NGOs manage operations efficiently and small businesses sell products online, reducing manual effort and improving workflow.",
+                                "Optimized backend APIs and frontend components for faster response times and reliable data handling.",
+                                "Enhanced UI/UX to simplify interactions, improving user engagement and satisfaction.",
                               ].map((item, idx) => (
                                 <li
                                   key={idx}
@@ -902,11 +881,12 @@ function App() {
                             {/* Tech tags */}
                             <div className="flex flex-wrap gap-2 mt-6">
                               {[
-                                "React",
+                                "React.js",
                                 "Node.js",
-                                "REST APIs",
+                                "Express.js",
+                                "MongoDB",
                                 "GitHub",
-                                "Agile",
+                                "Tailwind CSS",
                               ].map((tech) => (
                                 <span
                                   key={tech}
@@ -950,7 +930,6 @@ function App() {
                   </h3>
                 </div>
 
-                {/* Education Cards */}
                 <div className="grid md:grid-cols-2 gap-10">
                   {/* College Card */}
                   <div
@@ -959,70 +938,62 @@ function App() {
                     onMouseLeave={() => setHoveredEdu(null)}
                   >
                     <div
-                      className={`bg-linear-to-br from-[#032628]/80 to-[#021819]/80 backdrop-blur-sm p-8 rounded-2xl border border-gray-700/50 shadow-2xl transition-all duration-500 h-full ${
-                        hoveredEdu === 1
+                      className={`bg-linear-to-br from-[#032628]/80 to-[#021819]/80 backdrop-blur-sm p-8 rounded-2xl border border-gray-700/50 shadow-2xl transition-all duration-500 h-full ${hoveredEdu === 1
                           ? "shadow-amber-500/30 border-[#e8c83e]/50 -translate-y-2"
                           : ""
-                      }`}
+                        }`}
                     >
-                      {/* Icon badge */}
                       <div className="absolute -top-6 left-8 w-12 h-12 bg-linear-to-br from-[#e8c83e] to-amber-600 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
                         <GraduationCap className="w-6 h-6 text-gray-900" />
                       </div>
 
-                      {/* Decorative corner */}
-                      <div className="absolute top-0 right-0 w-24 h-24 bg-linear-to-br from-[#e8c83e]/10 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
                       <div className="mt-4 relative">
                         <h4 className="text-xl font-bold text-white mb-3 group-hover:text-[#e8c83e] transition-colors duration-300 leading-tight">
-                          Bachelor of Engineering in Information Technology
+                          B.Tech in Electronics and Computer Science
                         </h4>
 
                         <div className="flex items-center gap-2 text-gray-400 text-sm mb-2">
                           <MapPin className="w-4 h-4 shrink-0" />
-                          <span>
-                            Pimpri Chinchwad College of Engineering, Pune
-                          </span>
+                          <span>Shri Ramdeobaba College of Engineering, Nagpur</span>
                         </div>
 
                         <div className="flex items-center gap-2 text-[#e8c83e] text-sm font-medium mb-4">
                           <Calendar className="w-4 h-4" />
-                          <span>2021 – 2025</span>
+                          <span>Aug 2022 – July 2026</span>
                         </div>
 
                         <div className="w-12 h-[2px] bg-linear-to-l from-[#e8c83e] to-transparent mb-4"></div>
 
                         <p className="text-gray-300 text-[15px] leading-relaxed">
                           <span className="text-gray-400 font-medium">
+                            CGPA:
+                          </span>{" "}
+                          8.48
+                          <br />
+                          <span className="text-gray-400 font-medium">
                             Relevant Coursework:
                           </span>{" "}
-                          Data Structures, Web Development, Database Systems,
-                          Computer Networks, Operating Systems.
+                          Data Structures, System Design, Web Development, Computer Networks, Operating Systems.
                         </p>
                       </div>
                     </div>
                   </div>
 
-                  {/* Certifications Card */}
+                  {/* Certifications & Achievements */}
                   <div
                     className="group relative"
                     onMouseEnter={() => setHoveredEdu(2)}
                     onMouseLeave={() => setHoveredEdu(null)}
                   >
                     <div
-                      className={`bg-linear-to-br from-[#032628]/80 to-[#021819]/80 backdrop-blur-sm p-8 rounded-2xl border border-gray-700/50 shadow-2xl transition-all duration-500 h-full ${
-                        hoveredEdu === 2
+                      className={`bg-linear-to-br from-[#032628]/80 to-[#021819]/80 backdrop-blur-sm p-8 rounded-2xl border border-gray-700/50 shadow-2xl transition-all duration-500 h-full ${hoveredEdu === 2
                           ? "shadow-amber-500/30 border-[#e8c83e]/50 -translate-y-2"
                           : ""
-                      }`}
+                        }`}
                     >
-                      {/* Icon badge */}
                       <div className="absolute -top-6 left-8 w-12 h-12 bg-linear-to-br from-[#e8c83e] to-amber-600 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
                         <Award className="w-6 h-6 text-gray-900" />
                       </div>
-
-                      {/* Decorative corner */}
-                      <div className="absolute top-0 right-0 w-24 h-24 bg-linear-to-br from-[#e8c83e]/10 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
                       <div className="mt-4 relative">
                         <h4 className="text-xl font-bold text-white mb-5 group-hover:text-[#e8c83e] transition-colors duration-300">
@@ -1033,19 +1004,19 @@ function App() {
                           {[
                             {
                               icon: Code,
-                              text: "AWS Cloud Practitioner (In Progress)",
+                              text: "Cisco Certified: Networking Basics, Network Support & Security, Python Essentials 1",
                             },
                             {
                               icon: Award,
-                              text: "Cisco Ideathon 2025 (Networking Track)",
+                              text: "Selected for Smart India Hackathon (College Level) – Proposed ML-based GLOF Risk Prediction & Dynamic Traffic Rerouting solution",
                             },
                             {
                               icon: TrendingUp,
-                              text: "LeetCode Rating: 1350+",
+                              text: "LeetCode Rating: 1543 (Global Rank: 257K / 789K)",
                             },
                             {
                               icon: Briefcase,
-                              text: "Built 3 full-stack projects from scratch",
+                              text: "Solved 1000+ DSA problems across LeetCode, GFG, CodeChef & HackerRank",
                             },
                           ].map((item, idx) => (
                             <li
@@ -1068,22 +1039,10 @@ function App() {
               </div>
             </section>
           </div>
+
         </main>
       </div>
-
-      <style>
-        {`
-          .custom-spin {
-            animation: spin 12s linear infinite;
-          }
-          @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-          }
-        `}
-      </style>
     </>
   );
 }
-
 export default App;
