@@ -503,6 +503,139 @@ function App() {
               </div>
             </div>
           </section>
+          
+         <section id="resume" className="bg-[#021819] py-20 px-6 lg:px-24 min-h-screen flex items-center">
+            <div className="max-w-4xl mx-auto w-full">
+              <div className="text-center mb-12">
+                <div className="inline-block mb-4">
+                  <span className="px-4 py-2 bg-[#e8c83e]/10 text-[#e8c83e] rounded-full text-sm font-semibold border border-[#e8c83e]/20">
+                    Download Resume
+                  </span>
+                </div>
+                <h2 className="text-4xl lg:text-6xl font-bold mb-4 text-white tracking-tight">
+                  My <span className="text-[#e8c83e]">Resume</span>
+                </h2>
+                <div className="w-24 h-1 mx-auto mb-6 bg-[#e8c83e]"></div>
+                <p className="text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed">
+                  Get a comprehensive overview of my experience, skills, and achievements
+                </p>
+              </div>
+
+              <div className="bg-[#043b3b] rounded-3xl p-8 lg:p-12 border border-[#e8c83e]/30 shadow-2xl">
+                <div className="grid md:grid-cols-2 gap-8 mb-8">
+                  {/* Quick Stats */}
+                  <div className="space-y-4">
+                    <h3 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
+                      <Award className="w-6 h-6 text-[#e8c83e]" />
+                      Highlights
+                    </h3>
+                    <div className="space-y-3">
+                      <div className="flex items-start gap-3">
+                        <div className="w-2 h-2 bg-[#e8c83e] rounded-full mt-2"></div>
+                        <p className="text-gray-300">
+                          <span className="text-[#e8c83e] font-semibold">8.48 CGPA</span> in Electronics & Computer Science
+                        </p>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="w-2 h-2 bg-[#e8c83e] rounded-full mt-2"></div>
+                        <p className="text-gray-300">
+                          <span className="text-[#e8c83e] font-semibold">1250+</span> DSA Problems Solved
+                        </p>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="w-2 h-2 bg-[#e8c83e] rounded-full mt-2"></div>
+                        <p className="text-gray-300">
+                          <span className="text-[#e8c83e] font-semibold">10+</span> Full-Stack Projects
+                        </p>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="w-2 h-2 bg-[#e8c83e] rounded-full mt-2"></div>
+                        <p className="text-gray-300">
+                          <span className="text-[#e8c83e] font-semibold">4 Months</span> Internship Experience
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Key Skills */}
+                  <div className="space-y-4">
+                    <h3 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
+                      <Code className="w-6 h-6 text-[#e8c83e]" />
+                      Core Skills
+                    </h3>
+                    <div className="flex flex-wrap gap-2">
+                      {["React.js", "Node.js", "MongoDB", "Express.js", "JavaScript", "Java", "DSA", "System Design", "REST APIs", "Git"].map((skill) => (
+                        <span
+                          key={skill}
+                          className="px-3 py-1.5 bg-[#032628] text-gray-300 rounded-lg border border-[#e8c83e]/20 text-sm font-medium"
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="border-t border-[#e8c83e]/20 pt-8">
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <a
+                      href="C:\Users\manda\OneDrive\Desktop\Portfolio\Frontend\src\Kshitij Halmare.pdf"
+                      download="Kshitij_Halmare_Resume.pdf"
+                      className="group flex items-center gap-3 px-8 py-4 bg-[#e8c83e] text-[#032628] rounded-xl font-bold hover:bg-[#f5d84e] transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-[#e8c83e]/30 w-full sm:w-auto justify-center"
+                    >
+                      <svg
+                        className="w-6 h-6 group-hover:animate-bounce"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                        />
+                      </svg>
+                      Download Resume (PDF)
+                    </a>
+                    {/* <a
+                      href="https://drive.google.com/file/d/your-google-drive-link/view"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex items-center gap-3 px-8 py-4 bg-[#032628] text-[#e8c83e] rounded-xl font-bold border-2 border-[#e8c83e]/30 hover:border-[#e8c83e] transition-all duration-300 hover:scale-105 w-full sm:w-auto justify-center"
+                    >
+                      <ExternalLink className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+                      View Online
+                    </a> */}
+                  </div>
+                  <p className="text-center text-gray-400 text-sm mt-4">
+                    Last updated: January 2025
+                  </p>
+                </div>
+              </div>
+
+              {/* Additional Info */}
+              <div className="mt-12 grid md:grid-cols-3 gap-6">
+                <div className="bg-[#043b3b] rounded-xl p-6 border border-[#e8c83e]/20 text-center">
+                  <Briefcase className="w-8 h-8 text-[#e8c83e] mx-auto mb-3" />
+                  <h4 className="text-white font-semibold mb-2">Experience</h4>
+                  <p className="text-gray-400 text-sm">Full-Stack Development & Internship</p>
+                </div>
+                <div className="bg-[#043b3b] rounded-xl p-6 border border-[#e8c83e]/20 text-center">
+                  <GraduationCap className="w-8 h-8 text-[#e8c83e] mx-auto mb-3" />
+                  <h4 className="text-white font-semibold mb-2">Education</h4>
+                  <p className="text-gray-400 text-sm">B.Tech in Electronics & CS</p>
+                </div>
+                <div className="bg-[#043b3b] rounded-xl p-6 border border-[#e8c83e]/20 text-center">
+                  <Award className="w-8 h-8 text-[#e8c83e] mx-auto mb-3" />
+                  <h4 className="text-white font-semibold mb-2">Achievements</h4>
+                  <p className="text-gray-400 text-sm">LeetCode 1678 Rating, SIH Selected</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+
 
           <section id="skills" className="bg-[#032628] py-20 px-6 lg:px-24 min-h-screen flex items-center">
             <div className="max-w-7xl mx-auto w-full">
@@ -844,7 +977,7 @@ function App() {
                                 </h4>
                                 <div className="flex items-center gap-2 text-gray-400 text-sm mb-1">
                                   <MapPin className="w-4 h-4" />
-                                  <span>Wooferz / Remote</span>
+                                  <span>Wooferz Innovation</span>
                                 </div>
                                 <div className="flex items-center gap-2 text-[#e8c83e] text-sm font-medium">
                                   <Calendar className="w-4 h-4" />
@@ -1035,8 +1168,148 @@ function App() {
                       </div>
                     </div>
                   </div>
+                  
                 </div>
               </div>
+              <section id="contact" className="bg-[#032628] py-20 px-6 lg:px-24 min-h-screen flex items-center">
+            <div className="max-w-6xl mx-auto w-full">
+              <div className="text-center mb-16">
+                <div className="inline-block mb-4">
+                  <span className="px-4 py-2 bg-[#e8c83e]/10 text-[#e8c83e] rounded-full text-sm font-semibold border border-[#e8c83e]/20">
+                    Get In Touch
+                  </span>
+                </div>
+                <h2 className="text-4xl lg:text-6xl font-bold mb-4 text-white tracking-tight">
+                  Let's <span className="text-[#e8c83e]">Connect</span>
+                </h2>
+                <div className="w-24 h-1 mx-auto mb-6 bg-[#e8c83e]"></div>
+                <p className="text-gray-400 text-lg max-w-3xl mx-auto leading-relaxed">
+                  I'm always open to discussing new opportunities, collaborations, or just having a chat about technology and development.
+                </p>
+              </div>
+
+              <div className="grid md:grid-cols-3 gap-8">
+                {/* Email Card */}
+                <a
+                  href="mailto:kshitij.halmare1@gmail.com"
+                  className="group bg-[#043b3b] rounded-2xl p-8 border border-[#e8c83e]/20 hover:border-[#e8c83e]/50 transition-all duration-300 hover:shadow-xl hover:shadow-[#e8c83e]/10 hover:-translate-y-2"
+                >
+                  <div className="flex flex-col items-center text-center">
+                    <div className="w-16 h-16 bg-[#e8c83e]/10 rounded-full flex items-center justify-center mb-4 group-hover:bg-[#e8c83e]/20 transition-all duration-300">
+                      <Mail className="w-8 h-8 text-[#e8c83e] group-hover:scale-110 transition-transform duration-300" />
+                    </div>
+                    <h3 className="text-xl font-bold text-white mb-2 group-hover:text-[#e8c83e] transition-colors duration-300">
+                      Email
+                    </h3>
+                    <p className="text-gray-400 text-sm mb-3">Drop me a line</p>
+                    <p className="text-[#e8c83e] font-medium break-all">
+                      kshitij.halmare1@gmail.com
+                    </p>
+                  </div>
+                </a>
+
+                {/* LinkedIn Card */}
+                <a
+                  href="https://www.linkedin.com/in/kshitij-halmare/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group bg-[#043b3b] rounded-2xl p-8 border border-[#e8c83e]/20 hover:border-[#e8c83e]/50 transition-all duration-300 hover:shadow-xl hover:shadow-[#e8c83e]/10 hover:-translate-y-2"
+                >
+                  <div className="flex flex-col items-center text-center">
+                    <div className="w-16 h-16 bg-[#e8c83e]/10 rounded-full flex items-center justify-center mb-4 group-hover:bg-[#e8c83e]/20 transition-all duration-300">
+                      <Linkedin className="w-8 h-8 text-[#e8c83e] group-hover:scale-110 transition-transform duration-300" />
+                    </div>
+                    <h3 className="text-xl font-bold text-white mb-2 group-hover:text-[#e8c83e] transition-colors duration-300">
+                      LinkedIn
+                    </h3>
+                    <p className="text-gray-400 text-sm mb-3">Let's connect professionally</p>
+                    <p className="text-[#e8c83e] font-medium">
+                      @kshitij-halmare
+                    </p>
+                  </div>
+                </a>
+
+                {/* GitHub Card */}
+                <a
+                  href="https://github.com/Kshitij-Halmare/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group bg-[#043b3b] rounded-2xl p-8 border border-[#e8c83e]/20 hover:border-[#e8c83e]/50 transition-all duration-300 hover:shadow-xl hover:shadow-[#e8c83e]/10 hover:-translate-y-2"
+                >
+                  <div className="flex flex-col items-center text-center">
+                    <div className="w-16 h-16 bg-[#e8c83e]/10 rounded-full flex items-center justify-center mb-4 group-hover:bg-[#e8c83e]/20 transition-all duration-300">
+                      <Github className="w-8 h-8 text-[#e8c83e] group-hover:scale-110 transition-transform duration-300" />
+                    </div>
+                    <h3 className="text-xl font-bold text-white mb-2 group-hover:text-[#e8c83e] transition-colors duration-300">
+                      GitHub
+                    </h3>
+                    <p className="text-gray-400 text-sm mb-3">Check out my code</p>
+                    <p className="text-[#e8c83e] font-medium">
+                      @Kshitij-Halmare
+                    </p>
+                  </div>
+                </a>
+              </div>
+
+              {/* Additional Contact Info */}
+              <div className="mt-16 text-center">
+                <div className="bg-[#043b3b] rounded-2xl p-8 border border-[#e8c83e]/20 max-w-2xl mx-auto">
+                  <h3 className="text-2xl font-bold text-white mb-4">
+                    Currently Available for
+                  </h3>
+                  <div className="flex flex-wrap justify-center gap-4">
+                    <span className="px-6 py-3 bg-[#032628] text-[#e8c83e] rounded-full border border-[#e8c83e]/30 font-medium">
+                      Full-Time Opportunities
+                    </span>
+                    <span className="px-6 py-3 bg-[#032628] text-[#e8c83e] rounded-full border border-[#e8c83e]/30 font-medium">
+                      Freelance Projects
+                    </span>
+                    <span className="px-6 py-3 bg-[#032628] text-[#e8c83e] rounded-full border border-[#e8c83e]/30 font-medium">
+                      Collaborations
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Footer */}
+          <footer className="bg-[#021819] border-t border-gray-800/50 py-8 px-6">
+            <div className="max-w-6xl mx-auto">
+              <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div className="text-gray-400 text-sm">
+                  © 2025 Kshitij Halmare. All rights reserved.
+                </div>
+                <div className="flex gap-6">
+                  <a
+                    href="mailto:kshitij.halmare1@gmail.com"
+                    className="text-gray-400 hover:text-[#e8c83e] transition-colors duration-300"
+                    aria-label="Email"
+                  >
+                    <Mail className="w-5 h-5" />
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/kshitij-halmare/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-[#e8c83e] transition-colors duration-300"
+                    aria-label="LinkedIn"
+                  >
+                    <Linkedin className="w-5 h-5" />
+                  </a>
+                  <a
+                    href="https://github.com/Kshitij-Halmare/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-[#e8c83e] transition-colors duration-300"
+                    aria-label="GitHub"
+                  >
+                    <Github className="w-5 h-5" />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </footer>
             </section>
           </div>
 
