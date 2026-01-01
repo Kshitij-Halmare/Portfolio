@@ -504,7 +504,7 @@ function App() {
             </div>
           </section>
           
-         <section id="resume" className="bg-[#021819] py-20 px-6 lg:px-24 min-h-screen flex items-center">
+            <section id="resume" className="bg-[#021819] py-20 px-6 lg:px-24 min-h-screen flex items-center">
             <div className="max-w-4xl mx-auto w-full">
               <div className="text-center mb-12">
                 <div className="inline-block mb-4">
@@ -579,7 +579,7 @@ function App() {
                 <div className="border-t border-[#e8c83e]/20 pt-8">
                   <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                     <a
-                      href="C:\Users\manda\OneDrive\Desktop\Portfolio\Frontend\src\Kshitij Halmare.pdf"
+                      href="../public/Kshitij_Halmare_Resume.pdf"
                       download="Kshitij_Halmare_Resume.pdf"
                       className="group flex items-center gap-3 px-8 py-4 bg-[#e8c83e] text-[#032628] rounded-xl font-bold hover:bg-[#f5d84e] transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-[#e8c83e]/30 w-full sm:w-auto justify-center"
                     >
